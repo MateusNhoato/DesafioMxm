@@ -1,0 +1,58 @@
+﻿@page
+@model DesafioMxm.Pages.ConsultaModel
+@{
+}
+@if (Model.Resposta.Success)
+{
+    <div class="alert alert-success" role="alert">
+        <h2> Consulta efetuada com sucesso! </h2>
+    </div>
+    if(Model.Resposta.Data != null)
+    {
+        int resultadoNum = 0;
+        foreach (var data in Model.Resposta.Data)
+        {
+            resultadoNum++;
+
+            <div class="card w-75">
+                <div class="card-body">
+                    <h5 class="card-title">Resultado @resultadoNum</h5>
+                    <p class="card-text">Codigo: @data.Codigo</p>
+                    <p class="card-text">Descricao: @data.Descricao</p>
+                    <p class="card-text">Codigo Grupo Patrimonial: @data.CodigoGrupoPatrimonial</p>
+
+                    @if(data.ClassificacoesEspecificas.Count > 0)
+                    {
+                        <hr><h5>Classificações Específicas:</h5>
+                        <ul class="list-group list-group-flush">
+                        @foreach (var classificacao in data.ClassificacoesEspecificas)
+                        {
+                           
+                                <li class="list-group-item">
+                                    <p class="card-text">Codigo Classificação Específica: @classificacao.CodigoClassificacaoEspecifica</p>
+                                    <p class="card-text">Codigo do Grupo: @classificacao.CodigoDoGrupo</p>
+                                    <p class="card-text">Codigo do SubGrupo: @classificacao.CodigoDoSubGrupo</p>
+                                </li>
+                        }
+                        </ul>
+                    }
+                </div>
+            </div>
+            <br />
+        }
+    }
+    else
+    {
+        <h4>Nenhum dado encontrado.</h4>
+    }
+
+}
+else
+{
+    <div class="alert alert-danger" role="alert">
+        <h2>@Model.Resposta.Messages[0].Message</h2>
+    </div>
+    
+}
+
+<br /><a href="/Index" class="btn btn-secondary">Voltar</a>

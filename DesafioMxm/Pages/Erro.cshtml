@@ -1,10 +1,10 @@
-﻿@page
+﻿@page 
 @model DesafioMxm.Pages.ErroModel
 @{
 }
 
 <div class="alert alert-danger" role="alert">
-    <h2>@TempData["Erro"]</h2>
+    <h2>@Model.MensagemDeErro</h2>
 </div>
 
 <br /><a href="/Index" class="btn btn-secondary">Voltar</a>

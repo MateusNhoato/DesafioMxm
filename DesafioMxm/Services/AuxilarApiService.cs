@@ -1,14 +1,14 @@
 ﻿using DesafioMxm.Model;
-
+using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace DesafioMxm.Services
 {
-    public static class AuxilarApi
+    public class AuxilarApiService
     {
-        private static string _url = 
-            "https://mxmsau01.mxmwebmanager.com.br/api/InterfacedoSubGrupoPatrimonial/ConsultaSubGrupoPatrimonial";
-
-        public static async Task<string?> FazerPedido(UserModel user, DataModel? data)
+        private readonly string _url =
+            "https://h9146.mxmwebmanager.com.br/api/InterfacedoSubGrupoPatrimonial/ConsultaSubGrupoPatrimonial";
+        public async Task<RespostaApiModel?> FazerPedido(UserModel user, DataModel? data)
         {
             try
             {
@@ -19,12 +19,14 @@ namespace DesafioMxm.Services
                 var response = await httpClient.SendAsync(requestMessage);
                 var jsonString = await response.Content.ReadAsStringAsync();
 
-                return jsonString;
-            }
-            catch (Exception)
-            {
+                var respostaModel = JsonSerializer.Deserialize<RespostaApiModel>(jsonString);
 
-                return null;
+                return respostaModel;
+            }
+            catch (Exception e)
+            {
+                throw new AuxiliarApiServiceException(e.Message);
+               
             }
         }
     }

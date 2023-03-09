@@ -1,6 +1,6 @@
 ﻿namespace DesafioMxm.Model
 {
-    public class RespostaModel
+    public class RespostaApiModel
     {
 
         public bool Success { get; set; }
