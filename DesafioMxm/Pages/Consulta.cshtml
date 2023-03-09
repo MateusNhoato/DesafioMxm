@@ -1,0 +1,37 @@
+﻿@page
+@model DesafioMxm.Pages.ConsultaModel
+@{
+}
+@if (Model.Resposta.Success)
+{
+    <div class="alert alert-success" role="alert">
+        <h2> Consulta efetuada com sucesso! </h2>
+    </div>
+    if(Model.Resposta.Data != null)
+    {
+        foreach (var data in Model.Resposta.Data)
+        {
+            <div class="card w-75">
+                <div class="card-body">
+                    <h5 class="card-title">@data.Codigo</h5>
+                    <p class="card-text">@data.Descricao</p>
+                </div>
+            </div>
+            <br />
+        }
+    }
+    else
+    {
+        <h4>Nenhum dado encontrado.</h4>
+    }
+
+}
+else
+{
+    <div class="alert alert-danger" role="alert">
+        <h2>@Model.Resposta.Messages[0].Message</h2>
+    </div>
+    
+}
+
+<br /><a href="/Index" class="btn btn-secondary">Voltar</a>

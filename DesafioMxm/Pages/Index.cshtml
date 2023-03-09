@@ -1,0 +1,37 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<form method="post">
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label>Username</label>
+            <input required maxlength="30" type="text" class="form-control" asp-for="UserModel.Username" placeholder="Nome de usuário">
+        </div>
+        <div class="form-group col-md-4">
+            <label>Password</label>
+            <input asp-for="UserModel.Password" required maxlength="16" type="password" class="form-control" placeholder="Senha">
+        </div>
+    </div>
+    <div class="form-group col-md-4">
+        <label>Environment Name</label>
+        <input maxlength="20" asp-for="UserModel.EnvironmentName" required type="text" class="form-control" placeholder="Ambiente">
+    </div>
+    <br /><h2>Informações (opcional)</h2>
+
+    <div class="form-group col-md-4">
+        <label>Código Subgrupo Patrimonial</label>
+        <input maxlength="6" asp-for="DataModel.Codigo" type="text" class="form-control" placeholder="Código Subgrupo">
+    </div>
+    <div class="form-group col-md-4">
+        <label>Descrição</label>
+        <input maxlength="30" asp-for="DataModel.Descricao" type="text" class="form-control" placeholder="Descrição">
+    </div>
+    <div class="form-group col-md-4">
+        <label>Código Grupo Patrimonial</label>
+        <input maxlength="6" asp-for="DataModel.CodigoGrupoPatrimonial" type="text" class="form-control" placeholder="Código Grupo">
+    </div>
+    <br /><button type="submit" class="btn btn-info">Consultar</button>
+</form>
