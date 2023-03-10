@@ -1,5 +1,5 @@
 ﻿using DesafioMxm.Model;
-using Microsoft.AspNetCore.Mvc;
+using DesafioMxm.Model.DTO;
 using System.Text.Json;
 
 namespace DesafioMxm.Services
@@ -8,7 +8,7 @@ namespace DesafioMxm.Services
     {
         private readonly string _url =
             "https://h9146.mxmwebmanager.com.br/api/InterfacedoSubGrupoPatrimonial/ConsultaSubGrupoPatrimonial";
-        public async Task<RespostaApiModel?> FazerPedido(UserModel user, DataModel? data)
+        public async Task<RespostaApiDTO?> FazerPedido(UserModel user, DataModel? data)
         {
             try
             {
@@ -19,14 +19,14 @@ namespace DesafioMxm.Services
                 var response = await httpClient.SendAsync(requestMessage);
                 var jsonString = await response.Content.ReadAsStringAsync();
 
-                var respostaModel = JsonSerializer.Deserialize<RespostaApiModel>(jsonString);
+                var respostaModel = JsonSerializer.Deserialize<RespostaApiDTO>(jsonString);
 
                 return respostaModel;
             }
             catch (Exception e)
             {
                 throw new AuxiliarApiServiceException(e.Message);
-               
+
             }
         }
     }

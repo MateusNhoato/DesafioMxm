@@ -1,4 +1,5 @@
 using DesafioMxm.Model;
+using DesafioMxm.Model.DTO;
 using DesafioMxm.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -6,28 +7,31 @@ using System.Text.Json;
 
 namespace DesafioMxm.Pages
 {
-    public class ConsultaModel : PageModel
+    public class ResultadoModel : PageModel
     {
         private readonly AuxilarApiService _api;
-        public RespostaApiModel? Resposta { get; set; }
+        public RespostaApiDTO? Resposta { get; set; }
 
 
-        public ConsultaModel(AuxilarApiService api)
+        public ResultadoModel(AuxilarApiService api)
         {
             _api = api;
         }
 
         public async Task<IActionResult?> OnGet()
         {
-            if (TempData["User"] is null)
-                return RedirectToPage("./Erro", new { MensagemDeErro = "Usuário Inválido" });
-            
             try
             {
+                if (TempData["User"] is null)
+                    throw new Exception("Usuário Inválido");
+
                 var user = JsonSerializer.Deserialize<UserModel>(TempData["User"].ToString());
                 var data = JsonSerializer.Deserialize<DataModel>(TempData["Data"].ToString());
 
                 Resposta = await _api.FazerPedido(user, data);
+
+                if (Resposta is null)
+                    throw new Exception("Houve um problema com a resposta");
             }
             catch (Exception e)
             {

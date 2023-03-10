@@ -1,10 +1,10 @@
 ﻿@page
-@model DesafioMxm.Pages.ConsultaModel
+@model DesafioMxm.Pages.ResultadoModel
 @{
 }
 @if (Model.Resposta.Success)
 {
-    <div class="alert alert-success" role="alert">
+    <div class="alert alert-success container" role="alert">
         <h2> Consulta efetuada com sucesso! </h2>
     </div>
     if(Model.Resposta.Data != null)
@@ -16,7 +16,7 @@
 
             <div class="card w-75">
                 <div class="card-body">
-                    <h5 class="card-title">Resultado @resultadoNum</h5>
+                    <h5 class="card-title">#@resultadoNum</h5>
                     <p class="card-text">Codigo: @data.Codigo</p>
                     <p class="card-text">Descricao: @data.Descricao</p>
                     <p class="card-text">Codigo Grupo Patrimonial: @data.CodigoGrupoPatrimonial</p>
