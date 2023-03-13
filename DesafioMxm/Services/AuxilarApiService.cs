@@ -8,7 +8,7 @@ namespace DesafioMxm.Services
     {
         private readonly string _url =
             "https://h9146.mxmwebmanager.com.br/api/InterfacedoSubGrupoPatrimonial/ConsultaSubGrupoPatrimonial";
-        public async Task<RespostaApiDTO?> FazerPedido(UserModel user, DataModel? data)
+        public async Task<RespostaApiDTO?> ConsultarPatrimonioSubGrupo(UserModel user, DataModel? data)
         {
             try
             {
@@ -25,7 +25,7 @@ namespace DesafioMxm.Services
             }
             catch (Exception e)
             {
-                throw new AuxiliarApiServiceException(e.Message);
+                throw new Exception(e.Message);
 
             }
         }

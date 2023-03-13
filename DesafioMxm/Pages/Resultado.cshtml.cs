@@ -25,10 +25,10 @@ namespace DesafioMxm.Pages
                 if (TempData["User"] is null)
                     throw new Exception("Usuário Inválido");
 
-                var user = JsonSerializer.Deserialize<UserModel>(TempData["User"].ToString());
-                var data = JsonSerializer.Deserialize<DataModel>(TempData["Data"].ToString());
+                var user = GetUserModel();
+                var data = GetDataModel();
 
-                Resposta = await _api.FazerPedido(user, data);
+                Resposta = await _api.ConsultarPatrimonioSubGrupo(user, data);
 
                 if (Resposta is null)
                     throw new Exception("Houve um problema com a resposta");
@@ -41,5 +41,14 @@ namespace DesafioMxm.Pages
             return Page();
         }
 
+        private UserModel GetUserModel()
+        {
+            return JsonSerializer.Deserialize<UserModel>(TempData["User"].ToString());
+        }
+
+        private DataModel? GetDataModel() 
+        {
+            return JsonSerializer.Deserialize<DataModel>(TempData["Data"].ToString());
+        }
     }
 }

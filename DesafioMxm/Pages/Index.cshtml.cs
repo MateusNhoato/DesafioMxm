@@ -26,6 +26,5 @@ namespace DesafioMxm.Pages
 
             return RedirectToPage("./Resultado");
         }
-
     }
 }
